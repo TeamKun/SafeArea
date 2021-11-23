@@ -1,0 +1,4 @@
+name: SafeArea
+version: @version@
+main: net.kunmc.lab.safearea.SafeAreaPlugin
+api-version: 1.16
