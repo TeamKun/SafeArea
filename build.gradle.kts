@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 
 plugins {
@@ -20,6 +21,14 @@ dependencies {
     implementation("dev.kotx:flylib-reloaded:0.5.0")
 }
 
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from(configurations.compileClasspath.get().map {
+        if (it.isDirectory) it else zipTree(it)
+    })
+}
+
 val relocateShadow by tasks.registering(ConfigureShadowRelocation::class) {
     target = tasks.shadowJar.get()
     prefix = project.group.toString()
@@ -27,4 +36,8 @@ val relocateShadow by tasks.registering(ConfigureShadowRelocation::class) {
 
 tasks.shadowJar {
     dependsOn(relocateShadow)
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
 }

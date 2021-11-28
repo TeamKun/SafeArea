@@ -3,7 +3,7 @@ package net.kunmc.lab.safearea.command
 import dev.kotx.flylib.command.Command
 import dev.kotx.flylib.command.CommandContext
 import net.kunmc.lab.safearea.config.Status
-import net.kunmc.lab.safearea.game.Manager
+import net.kunmc.lab.safearea.game.Logic
 import net.kunmc.lab.safearea.game.Timer
 import org.bukkit.Bukkit
 import org.bukkit.entity.Entity
@@ -45,10 +45,9 @@ class StartCommand: Command("start") {
         val x = entities[0].chunk.x
         val z = entities[0].chunk.z
 
-        Manager().setSafeArea(x, z)
+        Logic().setSafeArea(x, z)
 
         success("安全地帯クラフトが始まりました！")
-        warn("x: ${Status.chunkLocation["x"]} z: ${Status.chunkLocation["z"]}")
-        Timer().countTimer(20)
+        Timer().countTimer()
     }
 }

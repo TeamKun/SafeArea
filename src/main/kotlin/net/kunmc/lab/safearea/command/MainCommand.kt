@@ -6,7 +6,8 @@ class MainCommand: Command("safe") {
     init {
         children(
             StartCommand(),
-            StopCommand()
+            StopCommand(),
+            ConfigCommand()
         )
     }
 }

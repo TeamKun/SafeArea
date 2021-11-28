@@ -9,9 +9,8 @@ import org.bukkit.event.player.PlayerRespawnEvent
 class PlayerRespawn: Listener {
 
     @EventHandler
-    fun onPlayerRespawn(e: PlayerRespawnEvent) {
+    fun onRespawn(e: PlayerRespawnEvent) {
         if(Status.isEnable) {
-            sendMsg("respawn: ${Status.targetLocation}")
             e.respawnLocation = Status.targetLocation!!
         }
     }
